@@ -1,0 +1,153 @@
+---
+description: Performance optimizasyonu ve test kuralları
+---
+
+# Performance ve Test Kuralları
+
+[CLAUDE.md](mdc:CLAUDE.md) dokümanına göre performance ve test kuralları:
+
+## ⚡ Performance Kuralları
+
+### 🚀 Optimizasyon Teknikleri
+1. **Lazy Loading**: React.lazy ile ekran bileşenleri
+2. **Memoization**: useMemo ve useCallback akıllıca kullan
+3. **FlatList**: Büyük listeler için optimizasyon
+4. **Image Optimizasyonu**: Uygun boyut ve format
+5. **Debouncing**: Kullanıcı girdilerini debounce et
+
+### ✅ Performance Best Practices
+```typescript
+// Lazy loading ekranlar için
+const ProfileScreen = React.lazy(() => import('./ProfileScreen'));
+
+// useMemo pahalı hesaplamalar için  
+const expensiveValue = useMemo(() => {
+  return heavyCalculation(data);
+}, [data]);
+
+// useCallback event handler'lar için
+const handlePress = useCallback(() => {
+  onPress?.(data);
+}, [onPress, data]);
+
+// FlatList optimizasyonu
+<FlatList
+  data={items}
+  renderItem={renderItem}
+  keyExtractor={item => item.id}
+  getItemLayout={(data, index) => ({
+    length: ITEM_HEIGHT,
+    offset: ITEM_HEIGHT * index,
+    index
+  })}
+  removeClippedSubviews={true}
+  maxToRenderPerBatch={10}
+  windowSize={10}
+/>
+
+// Debounced search
+const [searchTerm, setSearchTerm] = useState('');
+const debouncedSearchTerm = useDebounce(searchTerm, 300);
+```
+
+### 🎯 Performance Hedefleri
+- App başlatma süresi: < 2 saniye
+- Ekran geçişi: < 300ms  
+- Crash oranı: < 0.5%
+- ANR oranı: < 0.1%
+- Kullanıcı puanı: > 4.5 yıldız
+
+## 🧪 Test Kuralları
+
+### 📊 Test Coverage Hedefleri
+- Unit Testler: %80 coverage
+- Integration Testler: Ana kullanıcı akışları
+- E2E Testler: Kritik yollar (onboarding, tracking)
+
+### 🔧 Test Komutları
+```bash
+npm test              # Tüm testleri çalıştır
+npm test:unit         # Sadece unit testler
+npm test:integration  # Integration testler
+npm test:e2e         # End-to-end testler  
+npm test:coverage    # Coverage raporu
+```
+
+### ✅ Test Yazma Kuralları
+```typescript
+// Unit test örneği
+import { render, fireEvent } from '@testing-library/react-native';
+import { SymptomCard } from './SymptomCard';
+
+describe('SymptomCard', () => {
+  it('should display symptom name correctly', () => {
+    const mockSymptom = {
+      id: '1',
+      name: 'Karın ağrısı',
+      severity: 'moderate'
+    };
+    
+    const { getByText } = render(
+      <SymptomCard symptom={mockSymptom} />
+    );
+    
+    expect(getByText('Karın ağrısı')).toBeTruthy();
+  });
+  
+  it('should call onPress when pressed', () => {
+    const mockOnPress = jest.fn();
+    const { getByTestId } = render(
+      <SymptomCard 
+        symptom={mockSymptom} 
+        onPress={mockOnPress}
+        testID="symptom-card"
+      />
+    );
+    
+    fireEvent.press(getByTestId('symptom-card'));
+    expect(mockOnPress).toHaveBeenCalledWith(mockSymptom);
+  });
+});
+```
+
+### 🎯 Test Stratejisi
+1. **Unit Testler**: Bileşen mantığı ve utility fonksiyonları
+2. **Integration Testler**: Birden fazla bileşenin birlikte çalışması
+3. **E2E Testler**: Kullanıcı senaryoları (kayıt, giriş, veri girişi)
+4. **Performance Testler**: Memory leak, render performance
+5. **Accessibility Testler**: Screen reader desteği
+
+## 🔍 Code Quality Kontrolleri
+
+### Pre-commit Kontrolleri
+1. Linting geçmeli
+2. TypeScript derlenmeli  
+3. Testler geçmeli
+4. console.log production'da olmamalı
+
+### Code Review Checklist
+- [ ] Tasarım sistemine uygunluk
+- [ ] TypeScript tipleri tam
+- [ ] Hata yakalama implementasyonu
+- [ ] Loading state'leri mevcut
+- [ ] Accessibility düşünülmüş
+- [ ] Performance optimize edilmiş  
+- [ ] Testler yazılmış
+- [ ] Dokümantasyon güncel
+
+## 🚨 Monitoring
+```typescript
+// Performance monitoring
+import perf from '@react-native-firebase/perf';
+
+const trace = perf().newTrace('symptom_entry_flow');
+trace.start();
+// ... user flow
+trace.stop();
+
+// Crash reporting
+import crashlytics from '@react-native-firebase/crashlytics';
+
+crashlytics().recordError(error);
+crashlytics().log('Kullanıcı semptom ekledi');
+```

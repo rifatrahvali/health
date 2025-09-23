@@ -1,0 +1,129 @@
+---
+description: Lokalizasyon ve metin yönetimi kuralları
+---
+
+# Lokalizasyon ve Metin Yönetimi
+
+[CLAUDE.md](mdc:CLAUDE.md) dokümanına göre lokalizasyon kuralları:
+
+## 🌍 Metin Yönetimi Kuralları
+
+### ✅ YAPILACAKLAR
+1. **Hardcoded Metin Yok**: Tüm metinler dil dosyalarında
+2. **Key Isimlendirmesi**: Nokta notasyonu kullan (ör: `onboarding.welcome.title`)
+3. **Placeholder'lar**: Dinamik değerler için interpolasyon
+4. **Tarih/Saat**: Locale-aware formatlama
+5. **Sayılar**: Locale göre formatlama
+
+### ❌ YAPILMAYACAKLAR
+- Bileşenlerde hardcoded metin
+- İngilizce key'ler Türkçe metinler için
+- Locale desteği olmayan formatlama
+
+## 📁 Dil Dosyası Yapısı
+
+```typescript
+// locales/tr.json
+{
+  "onboarding": {
+    "welcome": {
+      "title": "Hoş Geldiniz",
+      "subtitle": "Bağırsak sağlığınız için buradayız"
+    },
+    "steps": {
+      "personalInfo": "Kişisel Bilgiler",
+      "symptoms": "Semptomlarınız",
+      "goals": "Hedefleriniz"
+    }
+  },
+  "dashboard": {
+    "greeting": "Merhaba {{name}}",
+    "lastEntry": "Son kayıt: {{date}}",
+    "todaysSymptoms": "Bugünkü Semptomlar"
+  },
+  "common": {
+    "save": "Kaydet",
+    "cancel": "İptal",  
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu"
+  }
+}
+```
+
+## 🔧 Kullanım Örnekleri
+
+```typescript
+// Hook kullanımı
+const { t } = useTranslation();
+
+// Basit metin
+<Text>{t('onboarding.welcome.title')}</Text>
+
+// Placeholder ile
+<Text>{t('dashboard.greeting', { name: user.name })}</Text>
+
+// Tarih formatı
+<Text>{t('dashboard.lastEntry', { 
+  date: formatDate(lastEntry.date) 
+})}</Text>
+```
+
+## 📅 Tarih ve Saat Formatı
+```typescript
+// Türkçe locale ile
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('tr-TR', {
+    year: 'numeric',
+    month: 'long', 
+    day: 'numeric'
+  }).format(date);
+};
+
+// Saat formatı
+const formatTime = (date: Date) => {
+  return new Intl.DateTimeFormat('tr-TR', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
+};
+```
+
+## 🔢 Sayı Formatı
+```typescript
+// Türk Lirası formatı
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('tr-TR', {
+    style: 'currency',
+    currency: 'TRY'
+  }).format(amount);
+};
+
+// Sayı formatı
+const formatNumber = (num: number) => {
+  return new Intl.NumberFormat('tr-TR').format(num);
+};
+```
+
+## 🎯 Key Isimlendirme Standartları
+- **Ekran bazlı**: `onboarding.step1.title`
+- **Bileşen bazlı**: `button.primary.text`  
+- **Ortak kelimeler**: `common.save`, `common.cancel`
+- **Hata mesajları**: `errors.validation.required`
+- **Başarı mesajları**: `success.data.saved`
+
+## 🔄 Çoğul Formlar
+```typescript
+// Türkçe için çoğul desteği
+{
+  "items": {
+    "zero": "Hiç öğe yok",
+    "one": "{{count}} öğe", 
+    "other": "{{count}} öğe"
+  }
+}
+
+// Kullanımı
+<Text>{t('items', { count: itemCount })}</Text>
+```

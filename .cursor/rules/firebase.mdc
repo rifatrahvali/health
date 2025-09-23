@@ -1,0 +1,104 @@
+---
+description: Firebase ve backend işlemleri kuralları
+---
+
+# Firebase ve Backend Kuralları
+
+[CLAUDE.md](mdc:CLAUDE.md) dokümanına göre Firebase kullanım kuralları:
+
+## 🔥 Firebase Servisleri
+- **Authentication**: Kullanıcı yönetimi için Firebase Auth
+- **Database**: Real-time veri için Firestore  
+- **Storage**: Resim/dosyalar için Firebase Storage
+- **Analytics**: Kullanıcı takibi için Firebase Analytics
+- **Crashlytics**: Hata raporlama için
+- **Cloud Functions**: Server-side mantık için
+
+## 📊 Firestore Yapısı
+```typescript
+// Koleksiyon yapısı
+users/{userId}/
+  profile: { ... }
+  onboarding: { ... }
+  settings: { ... }
+
+symptoms/{userId}/
+  entries/{entryId}: { ... }
+
+meals/{userId}/  
+  entries/{entryId}: { ... }
+
+insights/{userId}/
+  daily/
+  weekly/
+  monthly/
+```
+
+## 🔒 Güvenlik Kuralları
+- Kullanıcı sadece kendi verilerini okuyabilir/yazabilir
+- Veri tiplerini ve zorunlu alanları doğrula
+- Yazma işlemleri için rate limiting
+
+## 💾 API ve Veri Kuralları
+
+### ✅ YAPILACAKLAR
+```typescript
+// Async/await kullan
+const fetchUserData = async (userId: string) => {
+  try {
+    const doc = await firestore()
+      .collection('users')
+      .doc(userId)
+      .get();
+    return doc.data();
+  } catch (error) {
+    console.error('Kullanıcı verisi alınamadı:', error);
+    throw error;
+  }
+};
+
+// Loading state göster
+const [loading, setLoading] = useState(false);
+
+// Optimistic updates
+const updateSymptom = async (data) => {
+  // UI'ı hemen güncelle
+  setSymptoms(prev => [...prev, data]);
+  
+  // Sonra Firebase'e gönder
+  try {
+    await firestore().collection('symptoms').add(data);
+  } catch (error) {
+    // Hata durumunda geri al
+    setSymptoms(prev => prev.filter(item => item.id !== data.id));
+  }
+};
+```
+
+### ❌ YAPILMAYACAKLAR
+- Promise zinciri kullanma (async/await kullan)
+- Error handling atlamak  
+- Loading state göstermemek
+- PII bilgileri loglarda tutmak
+- HTTP yerine HTTPS kullanmak
+
+## 🔄 Offline Desteği
+```typescript
+// Firestore offline persistence
+firestore().enablePersistence();
+
+// Offline durumu kontrol et
+const isOnline = useNetInfo();
+```
+
+## 🚨 Hata Yönetimi
+- Her async işlem için try/catch
+- Error boundary'ler feature'lar için  
+- Kullanıcı dostu hata mesajları
+- Crash reporting için Crashlytics
+
+## 📱 Performance
+- Lazy loading ekran bileşenleri için
+- Debounce kullanıcı girdileri için (arama vb.)
+- FlatList büyük listeler için optimizasyon
+- Image optimizasyonu uygun boyut/format

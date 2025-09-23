@@ -1,0 +1,99 @@
+---
+globs: *.tsx,*.ts
+description: Styling ve tasarım sistemi kuralları
+---
+
+# Styling ve Tasarım Sistemi
+
+[CLAUDE.md](mdc:CLAUDE.md) tasarım sistemine uygun styling kuralları:
+
+## 🎨 Stil Yazma Kuralları
+
+### ✅ YAPILACAKLAR
+- StyleSheet.create() kullan - inline style yasak
+- Tasarım sistemi renklerini kullan
+- Spacing sabitlerini kullan
+- Platform.select() ile platform farkları
+
+```typescript
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.neutral[50],
+    padding: spacing.md,
+    borderRadius: 16,
+  }
+});
+```
+
+### ❌ YAPILMAYACAKLAR  
+- Inline style kullanma
+- Hardcoded renkler (#000000 gibi)
+- Sihirli sayılar (20, 16 vs. - sabit kullan)
+- External styling libraries (NativeWind, styled-components)
+
+## 🎯 Tasarım Token'ları
+
+### Renkler
+```typescript
+const colors = {
+  primary: {
+    50: '#F1F8F4',   // En açık arka plan
+    500: '#66BB6A',  // Primary aksiyonlar  
+    600: '#4CAF50',  // Ana marka rengi
+    900: '#2E7D32',  // Başlıklar
+  },
+  neutral: {
+    50: '#FAFAFA',   // App arka planı
+    100: '#F5F5F5',  // Card arka planı
+    600: '#757575',  // Body metni
+    800: '#424242',  // Başlıklar
+  }
+}
+```
+
+### Spacing
+```typescript
+const spacing = {
+  xs: 4,   sm: 8,   md: 16,
+  lg: 24,  xl: 32,  '2xl': 48
+}
+```
+
+## 🔧 Bileşen Stilleri
+
+### Button Örnekleri
+```typescript
+const styles = StyleSheet.create({
+  primaryButton: {
+    backgroundColor: colors.primary[600],
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+    shadowColor: colors.primary[600],
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+  },
+  
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: spacing.md,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+  }
+});
+```
+
+## 📱 Platform Farkları
+```typescript
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: Platform.select({
+      ios: 'System',
+      android: 'Roboto',
+    }),
+    fontSize: 16,
+  }
+});
+```

@@ -1,0 +1,76 @@
+---
+globs: *.tsx,*.ts
+description: React Native bileşen yapısı ve TypeScript kuralları
+---
+
+# Bileşen Yapısı Kuralları
+
+[CLAUDE.md](mdc:CLAUDE.md) dokümanına göre tüm bileşenler şu yapıya uymalıdır:
+
+## 🏗️ Bileşen Yapısı Şablonu
+
+```typescript
+import React, { useState, useEffect, memo } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+interface ComponentNameProps {
+  title: string;
+  onPress?: () => void;
+}
+
+const ComponentName: React.FC<ComponentNameProps> = ({
+  title,
+  onPress
+}) => {
+  // 1. Hook'lar ilk sırada
+  const [state, setState] = useState(false);
+
+  // 2. Effect'ler ikinci sırada
+  useEffect(() => {
+    // Effect mantığı
+  }, []);
+
+  // 3. Handler'lar üçüncü sırada
+  const handlePress = () => {
+    onPress?.();
+  };
+
+  // 4. Render son sırada
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    // Stil kuralları
+  },
+  title: {
+    // Stil kuralları
+  }
+});
+
+export default memo(ComponentName);
+```
+
+## 📋 Zorunlu Kurallar
+1. **Props Interface**: Her bileşen için prop interface tanımla
+2. **TypeScript**: Tam tür güvenliği, `any` kullanma
+3. **Hook Sırası**: useState → useEffect → custom hooks → handlers
+4. **StyleSheet**: Her zaman StyleSheet.create() kullan
+5. **Memo**: Pahalı render'lar için React.memo kullan
+6. **Imports**: React imports → React Native imports → custom imports
+
+## 🎨 Stil Kuralları
+- Inline style yasak - sadece StyleSheet
+- Renk değerleri theme'dan gelsin
+- Spacing değerleri sabitlerden gelsin
+- Platform.select() ile platform spesifik stiller
+
+## 🔄 State Yönetimi
+- Lokal state için useState
+- Karmaşık state için useReducer  
+- Global state için Context API
+- Reusable logic için custom hook'lar

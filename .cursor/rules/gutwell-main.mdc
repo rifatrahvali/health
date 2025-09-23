@@ -1,0 +1,50 @@
+---
+alwaysApply: true
+description: Ana GutWell geliştirme kuralları ve tasarım sistemi
+---
+
+# GutWell Ana Geliştirme Kuralları
+
+Bu proje [CLAUDE.md](mdc:CLAUDE.md) dokümanındaki kurallara göre geliştirilmelidir.
+
+## 🎯 Temel Prensipler
+- **Minimalizm İlk**: Her element bir amaca hizmet etmeli
+- **Nefes Alabilir Alan**: Bol beyaz alan, temiz tipografi
+- **Yumuşak ve Organik**: Yuvarlatılmış köşeler, nazik animasyonlar
+- **Veri Netliği**: Karmaşık sağlık verisi basit ve güzel şekilde sunulmalı
+
+## 🎨 Tasarım Sistemi
+### Renk Paleti
+- Primary: Yumuşak yeşil tonları (#4CAF50 ana marka rengi)
+- Neutral: Yumuşak gri tonları (#FAFAFA - #212121)
+- Semantic: success, warning, error, info
+- Gut Health: semptom şiddeti için özel renkler
+
+### Tipografi
+- iOS: System font, Android: Roboto
+- Font boyutları: 12px (xs) - 32px (4xl)
+- Font kalınlıkları: 400 (regular) - 700 (bold)
+
+### Spacing Sistemi
+- xs: 4px, sm: 8px, md: 16px, lg: 24px, xl: 32px, 2xl: 48px, 3xl: 64px
+
+## 🚀 Geliştirme Kuralları
+1. **Sadece Fonksiyonel Bileşenler**: React hooks kullan, class component yok
+2. **TypeScript Zorunlu**: Tam tür güvenliği, `any` tipi kullanma
+3. **Props Interface**: Her zaman prop interface'leri tanımla
+4. **StyleSheet Kullan**: Inline style veya harici styling kütüphanesi yok
+5. **Firebase Backend**: Auth, Firestore, Storage, Analytics kullan
+6. **Yerel State İlk**: useState kullan, sonra Context API
+7. **Async/Await**: Promise yerine async/await kullan
+8. **Error Handling**: Her zaman hata yakalama ve loading state'leri
+9. **Performance**: Lazy loading, memoization, FlatList optimizasyonu
+10. **Accessibility**: Erişilebilirlik her zaman göz önünde bulundurulmalı
+
+## 💡 En İyi Uygulamalar
+- ✅ Bileşenleri küçük ve odaklı tut
+- ✅ Semantik isimlendirme kullan  
+- ✅ Kendi kendini açıklayan kod yaz
+- ✅ Tüm aksiyonlar için geri bildirim sağla
+- ❌ Inline style kullanma (StyleSheet kullan)
+- ❌ Sihirli sayılar kullanma (sabitler kullan)
+- ❌ Ana thread'i bloke etme
