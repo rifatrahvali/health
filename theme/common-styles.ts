@@ -247,3 +247,4 @@ export const CommonStyles = StyleSheet.create({
 });
 
 export default CommonStyles;
+

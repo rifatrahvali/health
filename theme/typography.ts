@@ -65,3 +65,4 @@ export const Typography = {
     widest: 1.5,
   },
 } as const;
+

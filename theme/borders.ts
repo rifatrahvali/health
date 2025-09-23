@@ -20,3 +20,4 @@ export const Borders = {
     bold: 4,
   },
 } as const;
+

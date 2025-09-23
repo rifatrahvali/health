@@ -46,6 +46,13 @@ export const Colors = {
     critical: '#EF9A9A',
   },
 
+  symptoms: {
+    mild: '#FFF9C4',
+    moderate: '#FFE082',
+    severe: '#FFAB91',
+    verySevere: '#EF9A9A',
+  },
+
   // Background Colors
   background: {
     primary: '#FAFAFA',
@@ -84,3 +91,4 @@ export const Colors = {
     quaternary: '#C8E6C9',
   },
 } as const;
+

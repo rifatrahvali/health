@@ -25,3 +25,4 @@ export const Layout = {
   maxContentWidth: 600,
   minButtonWidth: 120,
 } as const;
+

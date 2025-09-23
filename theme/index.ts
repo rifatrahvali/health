@@ -15,13 +15,14 @@ import { Shadows } from './shadows';
 import { Animations } from './animations';
 
 export const Theme = {
-  colors: Colors,
-  spacing: Spacing,
-  layout: Layout,
-  typography: Typography,
-  borders: Borders,
-  shadows: Shadows,
-  animations: Animations,
+  Colors,
+  Spacing,
+  Layout,
+  Typography,
+  Borders,
+  Shadows,
+  Animations,
 } as const;
 
 export default Theme;
+
