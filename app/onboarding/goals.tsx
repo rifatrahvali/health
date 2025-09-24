@@ -166,7 +166,7 @@ export default function GoalSelectionScreen() {
               </Text>
               {goal.selected && (
                 <View style={styles.checkmark}>
-                  <Text style={styles.checkmarkText}>✓</Text>
+                  <Text style={styles.checkmarkText}>OK</Text>
                 </View>
               )}
             </TouchableOpacity>

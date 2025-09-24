@@ -18,7 +18,13 @@ export default function Index() {
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Debug: Reset onboarding for testing (remove this in production)
-      // await SecureStore.deleteItemAsync('onboardingCompleted');
+      await SecureStore.deleteItemAsync('onboardingCompleted');
+      await SecureStore.deleteItemAsync('userLanguage');
+      await SecureStore.deleteItemAsync('userGoals');
+      await SecureStore.deleteItemAsync('userAccount');
+      await SecureStore.deleteItemAsync('userCommitment');
+      await SecureStore.deleteItemAsync('userInsights');
+      await SecureStore.deleteItemAsync('onboardingStep');
 
       // Check if onboarding is completed
       const onboardingCompleted = await SecureStore.getItemAsync('onboardingCompleted');

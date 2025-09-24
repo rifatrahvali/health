@@ -34,7 +34,7 @@ export default function CommitmentScreen() {
   const longPressAnimValue = useRef(new Animated.Value(0)).current;
   const signatureRef = useRef<any>(null);
   const currentPath = useRef('');
-  const longPressTimer = useRef<NodeJS.Timeout>();
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadLanguage();

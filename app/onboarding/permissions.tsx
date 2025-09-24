@@ -36,12 +36,12 @@ export default function PermissionsScreen() {
       notifications: {
         title: '📱 Bildirimler',
         description: 'Size kişiselleştirilmiş hatırlatıcılar ve ipuçları göndermek için',
-        benefit: '• Günlük sağlık ipuçları\n• İlaç hatırlatıcıları\n• Yemek takip hatırlatmaları',
+        benefit: 'Günlük sağlık ipuçları\nİlaç hatırlatıcıları\nYemek takip hatırlatmaları',
       },
       healthApp: {
         title: '❤️ Sağlık Uygulaması',
         description: 'Adım, uyku ve diğer sağlık verilerinizi senkronize etmek için',
-        benefit: '• Otomatik aktivite takibi\n• Uyku kalitesi analizi\n• Daha doğru öneriler',
+        benefit: 'Otomatik aktivite takibi\nUyku kalitesi analizi\nDaha doğru öneriler',
       },
       enable: 'İzin Ver',
       enabled: 'İzin Verildi',
@@ -55,12 +55,12 @@ export default function PermissionsScreen() {
       notifications: {
         title: '📱 Notifications',
         description: 'To send you personalized reminders and tips',
-        benefit: '• Daily health tips\n• Medication reminders\n• Meal tracking reminders',
+        benefit: 'Daily health tips\nMedication reminders\nMeal tracking reminders',
       },
       healthApp: {
         title: '❤️ Health App',
         description: 'To sync your steps, sleep and other health data',
-        benefit: '• Automatic activity tracking\n• Sleep quality analysis\n• More accurate recommendations',
+        benefit: 'Automatic activity tracking\nSleep quality analysis\nMore accurate recommendations',
       },
       enable: 'Enable',
       enabled: 'Enabled',
@@ -126,7 +126,7 @@ export default function PermissionsScreen() {
             </Text>
             {notificationsEnabled && (
               <View style={styles.enabledBadge}>
-                <Text style={styles.enabledBadgeText}>✓</Text>
+                <Text style={styles.enabledBadgeText}>OK</Text>
               </View>
             )}
           </View>
@@ -163,7 +163,7 @@ export default function PermissionsScreen() {
             </Text>
             {healthAppEnabled && (
               <View style={styles.enabledBadge}>
-                <Text style={styles.enabledBadgeText}>✓</Text>
+                <Text style={styles.enabledBadgeText}>OK</Text>
               </View>
             )}
           </View>

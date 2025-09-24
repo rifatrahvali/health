@@ -245,7 +245,7 @@ export default function OnboardingCompletedScreen() {
                   <Text style={styles.achievementDescription}>{achievement.description}</Text>
                 </View>
                 <View style={styles.achievementBadge}>
-                  <Text style={styles.achievementBadgeText}>✓</Text>
+                  <Text style={styles.achievementBadgeText}>OK</Text>
                 </View>
               </View>
             ))}

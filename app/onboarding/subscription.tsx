@@ -196,7 +196,7 @@ export default function SubscriptionScreen() {
         </Text>
         {(language === 'tr' ? plan.featuresTr : plan.features).map((feature, index) => (
           <View key={index} style={styles.featureItem}>
-            <Text style={styles.featureIcon}>✓</Text>
+            <Text style={styles.featureIcon}>+</Text>
             <Text style={[
               styles.featureText,
               selectedPlan === plan.id && styles.featureTextSelected,
@@ -209,7 +209,7 @@ export default function SubscriptionScreen() {
 
       {selectedPlan === plan.id && (
         <View style={styles.selectedIndicator}>
-          <Text style={styles.selectedIcon}>✓</Text>
+          <Text style={styles.selectedIcon}>OK</Text>
         </View>
       )}
     </TouchableOpacity>
@@ -238,7 +238,7 @@ export default function SubscriptionScreen() {
           <TouchableOpacity style={styles.linkButton}>
             <Text style={styles.linkText}>{currentContent.terms}</Text>
           </TouchableOpacity>
-          <Text style={styles.linkSeparator}>•</Text>
+          <Text style={styles.linkSeparator}>|</Text>
           <TouchableOpacity style={styles.linkButton}>
             <Text style={styles.linkText}>{currentContent.privacy}</Text>
           </TouchableOpacity>

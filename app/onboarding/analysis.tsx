@@ -138,7 +138,7 @@ export default function AnalysisScreen() {
                     progress > (index + 1) * 20 && styles.stepNumberCompleted,
                   ]}
                 >
-                  {progress > (index + 1) * 20 ? '✓' : index + 1}
+                  {progress > (index + 1) * 20 ? 'OK' : index + 1}
                 </Text>
               </View>
               <Text

@@ -291,7 +291,7 @@ export default function PersonalizationRevealScreen() {
                   {insights.quickWins.map((win, index) => (
                     <View key={index} style={styles.quickWinItem}>
                       <View style={styles.quickWinIcon}>
-                        <Text style={styles.quickWinIconText}>✅</Text>
+                        <Text style={styles.quickWinIconText}>+</Text>
                       </View>
                       <Text style={styles.quickWinText}>{win}</Text>
                     </View>

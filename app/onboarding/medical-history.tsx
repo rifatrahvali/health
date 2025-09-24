@@ -35,7 +35,7 @@ const CONDITIONS: MedicalCondition[] = [
   { id: 'anxiety_depression', label: 'Anxiety/Depression', labelTr: 'Kaygı/Depresyon', icon: '🧠', selected: false },
   { id: 'autoimmune', label: 'Autoimmune Disease', labelTr: 'Otoimmün Hastalık', icon: '🛡️', selected: false },
   { id: 'food_allergies', label: 'Food Allergies', labelTr: 'Gıda Alerjileri', icon: '🥜', selected: false },
-  { id: 'none', label: 'None of the above', labelTr: 'Hiçbiri', icon: '✓', selected: false },
+  { id: 'none', label: 'None of the above', labelTr: 'Hiçbiri', icon: 'OK', selected: false },
 ];
 
 export default function MedicalHistoryScreen() {
@@ -161,7 +161,7 @@ export default function MedicalHistoryScreen() {
                 </Text>
                 {condition.selected && (
                   <View style={styles.checkmark}>
-                    <Text style={styles.checkmarkText}>✓</Text>
+                    <Text style={styles.checkmarkText}>OK</Text>
                   </View>
                 )}
               </TouchableOpacity>
