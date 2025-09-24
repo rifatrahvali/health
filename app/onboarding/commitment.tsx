@@ -30,6 +30,7 @@ export default function CommitmentScreen() {
   const [commitmentMade, setCommitmentMade] = useState(false);
   const [showQuestions, setShowQuestions] = useState(true);
   const [questionAnswers, setQuestionAnswers] = useState<string[]>(['', '', '']);
+  const [isDrawing, setIsDrawing] = useState(false);
 
   const longPressAnimValue = useRef(new Animated.Value(0)).current;
   const signatureRef = useRef<any>(null);
@@ -121,6 +122,7 @@ export default function CommitmentScreen() {
     onPanResponderGrant: (evt) => {
       const { locationX, locationY } = evt.nativeEvent;
       currentPath.current = `M${locationX},${locationY}`;
+      setIsDrawing(true);
     },
     onPanResponderMove: (evt) => {
       const { locationX, locationY } = evt.nativeEvent;
@@ -128,7 +130,7 @@ export default function CommitmentScreen() {
       setSignaturePath(currentPath.current);
     },
     onPanResponderRelease: () => {
-      // Signature complete
+      setIsDrawing(false);
     },
   });
 
@@ -206,7 +208,10 @@ export default function CommitmentScreen() {
         </View>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={!isDrawing}>
         <Text style={styles.title}>{currentContent.title}</Text>
         <Text style={styles.subtitle}>{currentContent.subtitle}</Text>
 
