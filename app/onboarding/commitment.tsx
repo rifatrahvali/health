@@ -15,6 +15,7 @@ import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import Svg, { Path } from 'react-native-svg';
 import { Theme } from '../../theme';
+import { CommonStyles } from '../../theme/common-styles';
 
 const { Colors, Spacing, Borders, Typography } = Theme;
 const { width } = Dimensions.get('window');
@@ -311,11 +312,11 @@ export default function CommitmentScreen() {
       {commitmentMade && (
         <View style={styles.footer}>
           <TouchableOpacity
-            style={styles.continueButton}
+            style={CommonStyles.primaryButton}
             onPress={handleContinue}
             activeOpacity={0.8}
           >
-            <Text style={styles.continueButtonText}>{currentContent.continueButton}</Text>
+            <Text style={CommonStyles.primaryButtonText}>{currentContent.continueButton}</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -524,16 +525,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background.card,
     borderTopWidth: 1,
     borderTopColor: Colors.border.light,
-  },
-  continueButton: {
-    backgroundColor: Colors.primary[600],
-    paddingVertical: Spacing.md,
-    borderRadius: Borders.radius.full,
-    alignItems: 'center',
-  },
-  continueButtonText: {
-    color: Colors.text.inverse,
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.bold,
   },
 });

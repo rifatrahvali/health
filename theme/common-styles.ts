@@ -116,12 +116,12 @@ export const CommonStyles = StyleSheet.create({
   // Buttons
   primaryButton: {
     backgroundColor: Colors.primary[600],
-    paddingVertical: Spacing.md,
+    paddingVertical: Spacing.md + 2,
     paddingHorizontal: Spacing.xl,
     borderRadius: Borders.radius.full,
     alignItems: 'center',
     justifyContent: 'center',
-    height: Layout.buttonHeight,
+    minHeight: Layout.buttonHeight,
     ...Shadows.primary,
   },
 
@@ -129,24 +129,30 @@ export const CommonStyles = StyleSheet.create({
     color: Colors.text.inverse,
     fontSize: Typography.fontSize.lg,
     fontWeight: Typography.fontWeight.bold,
+    textAlign: 'center',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 
   secondaryButton: {
     backgroundColor: 'transparent',
     borderWidth: Borders.width.base,
     borderColor: Colors.primary[600],
-    paddingVertical: Spacing.md - Borders.width.base,
+    paddingVertical: Spacing.md,
     paddingHorizontal: Spacing.xl,
     borderRadius: Borders.radius.full,
     alignItems: 'center',
     justifyContent: 'center',
-    height: Layout.buttonHeight,
+    minHeight: Layout.buttonHeight,
   },
 
   secondaryButtonText: {
     color: Colors.primary[600],
     fontSize: Typography.fontSize.lg,
     fontWeight: Typography.fontWeight.semibold,
+    textAlign: 'center',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 
   ghostButton: {

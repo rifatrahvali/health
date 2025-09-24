@@ -133,11 +133,11 @@ export default function WelcomeScreen() {
         </View>
 
         <TouchableOpacity
-          style={CommonStyles.primaryButton}
+          style={[CommonStyles.primaryButton, styles.continueButton]}
           onPress={handleContinue}
           activeOpacity={0.8}
         >
-          <Text style={CommonStyles.primaryButtonText}>{currentContent.continueButton}</Text>
+          <Text style={[CommonStyles.primaryButtonText, styles.continueButtonText]}>{currentContent.continueButton}</Text>
         </TouchableOpacity>
 
         <View style={styles.decorativeElements}>
@@ -156,49 +156,51 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: Spacing.lg,
+    paddingVertical: Spacing.lg,
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: Spacing.xl,
+    marginBottom: Spacing.lg,
   },
   logoPlaceholder: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     backgroundColor: Colors.primary[100],
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: Spacing.md,
-    ...Theme.Shadows.md,
+    marginBottom: Spacing.sm,
+    ...Theme.Shadows.sm,
   },
   logoEmoji: {
-    fontSize: 50,
+    fontSize: 40,
   },
   appName: {
-    fontSize: Typography.fontSize.xxxxl,
+    fontSize: Typography.fontSize.xxxl,
     fontWeight: Typography.fontWeight.bold,
-    color: Colors.primary[900],
+    color: Colors.primary[800],
     letterSpacing: Typography.letterSpacing.wide,
   },
   tagline: {
-    fontSize: Typography.fontSize.xxl,
+    fontSize: Typography.fontSize.xl,
     fontWeight: Typography.fontWeight.semibold,
-    color: Colors.primary[800],
+    color: Colors.primary[700],
     textAlign: 'center',
     marginBottom: Spacing.md,
-    lineHeight: Typography.fontSize.xxl * Typography.lineHeight.normal,
+    lineHeight: Typography.fontSize.xl * Typography.lineHeight.normal,
   },
   description: {
     fontSize: Typography.fontSize.base,
     color: Colors.text.secondary,
     textAlign: 'center',
-    marginBottom: Spacing.xxl,
+    marginBottom: Spacing.xl,
     lineHeight: Typography.fontSize.base * Typography.lineHeight.relaxed,
-    paddingHorizontal: Spacing.lg,
+    paddingHorizontal: Spacing.md,
   },
   languageContainer: {
-    marginBottom: Spacing.xxl,
+    marginBottom: Spacing.xl,
     alignItems: 'center',
+    width: '100%',
   },
   languageLabel: {
     fontSize: Typography.fontSize.sm,
@@ -207,28 +209,42 @@ const styles = StyleSheet.create({
   },
   languageButtons: {
     flexDirection: 'row',
-    gap: Spacing.md,
+    gap: Spacing.sm,
+    justifyContent: 'center',
+    width: '100%',
   },
   languageButton: {
-    paddingHorizontal: Spacing.lg,
+    paddingHorizontal: Spacing.md,
     paddingVertical: Spacing.sm,
-    borderRadius: Borders.radius.xl,
+    borderRadius: Borders.radius.lg,
     borderWidth: Borders.width.base,
     borderColor: Colors.border.light,
     backgroundColor: Colors.background.card,
+    minWidth: 100,
+    alignItems: 'center',
   },
   languageButtonActive: {
     borderColor: Colors.primary[600],
     backgroundColor: Colors.primary[50],
   },
   languageButtonText: {
-    fontSize: Typography.fontSize.base,
+    fontSize: Typography.fontSize.sm,
     color: Colors.text.secondary,
     fontWeight: Typography.fontWeight.medium,
+    textAlign: 'center',
   },
   languageButtonTextActive: {
     color: Colors.primary[800],
     fontWeight: Typography.fontWeight.semibold,
+  },
+  continueButton: {
+    width: '100%',
+    maxWidth: 280,
+    paddingVertical: Spacing.md + 4,
+  },
+  continueButtonText: {
+    fontSize: Typography.fontSize.base,
+    lineHeight: Typography.fontSize.base * Typography.lineHeight.normal,
   },
   decorativeElements: {
     position: 'absolute',

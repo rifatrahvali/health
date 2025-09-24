@@ -192,18 +192,18 @@ export default function PermissionsScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.skipButton} onPress={handleContinue}>
-          <Text style={styles.skipButtonText}>{currentContent.skip}</Text>
+        <TouchableOpacity style={CommonStyles.ghostButton} onPress={handleContinue}>
+          <Text style={CommonStyles.ghostButtonText}>{currentContent.skip}</Text>
         </TouchableOpacity>
       </ScrollView>
 
       <View style={styles.footer}>
         <TouchableOpacity
-          style={styles.continueButton}
+          style={CommonStyles.primaryButton}
           onPress={handleContinue}
           activeOpacity={0.8}
         >
-          <Text style={styles.continueButtonText}>{currentContent.continue}</Text>
+          <Text style={CommonStyles.primaryButtonText}>{currentContent.continue}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -313,32 +313,11 @@ const styles = StyleSheet.create({
   permissionButtonTextEnabled: {
     color: Colors.primary[700],
   },
-  skipButton: {
-    alignItems: 'center',
-    paddingVertical: Spacing.md,
-    marginTop: Spacing.sm,
-  },
-  skipButtonText: {
-    fontSize: Typography.fontSize.base,
-    color: Colors.text.tertiary,
-    textDecorationLine: 'underline',
-  },
   footer: {
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
     backgroundColor: Colors.background.card,
     borderTopWidth: 1,
     borderTopColor: Colors.border.light,
-  },
-  continueButton: {
-    backgroundColor: Colors.primary[600],
-    paddingVertical: Spacing.md,
-    borderRadius: Borders.radius.full,
-    alignItems: 'center',
-  },
-  continueButtonText: {
-    color: Colors.text.inverse,
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.bold,
   },
 });

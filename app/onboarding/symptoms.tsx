@@ -10,6 +10,7 @@ import {
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { Theme } from '../../theme';
+import { CommonStyles } from '../../theme/common-styles';
 
 const { Colors, Spacing, Borders, Typography } = Theme;
 
@@ -209,20 +210,20 @@ export default function SymptomsScreen() {
         {renderCategory('other', currentContent.other)}
 
         <TouchableOpacity
-          style={styles.skipButton}
+          style={CommonStyles.ghostButton}
           onPress={handleSkip}
         >
-          <Text style={styles.skipButtonText}>{currentContent.skipButton}</Text>
+          <Text style={CommonStyles.ghostButtonText}>{currentContent.skipButton}</Text>
         </TouchableOpacity>
       </ScrollView>
 
       <View style={styles.footer}>
         <TouchableOpacity
-          style={styles.continueButton}
+          style={CommonStyles.primaryButton}
           onPress={handleContinue}
           activeOpacity={0.8}
         >
-          <Text style={styles.continueButtonText}>{currentContent.continueButton}</Text>
+          <Text style={CommonStyles.primaryButtonText}>{currentContent.continueButton}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -339,32 +340,11 @@ const styles = StyleSheet.create({
     color: Colors.text.inverse,
     fontWeight: Typography.fontWeight.bold,
   },
-  skipButton: {
-    alignItems: 'center',
-    paddingVertical: Spacing.md,
-    marginBottom: Spacing.xl,
-  },
-  skipButtonText: {
-    fontSize: Typography.fontSize.base,
-    color: Colors.text.tertiary,
-    textDecorationLine: 'underline',
-  },
   footer: {
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
     backgroundColor: Colors.background.card,
     borderTopWidth: 1,
     borderTopColor: Colors.border.light,
-  },
-  continueButton: {
-    backgroundColor: Colors.primary[600],
-    paddingVertical: Spacing.md,
-    borderRadius: Borders.radius.full,
-    alignItems: 'center',
-  },
-  continueButtonText: {
-    color: Colors.text.inverse,
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.bold,
   },
 });

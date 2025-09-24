@@ -214,13 +214,13 @@ export default function GoalSelectionScreen() {
         </View>
         <TouchableOpacity
           style={[
-            styles.continueButton,
-            getSelectedCount() === 0 && styles.continueButtonDisabled,
+            CommonStyles.primaryButton,
+            getSelectedCount() === 0 && CommonStyles.buttonDisabled,
           ]}
           onPress={handleContinue}
           activeOpacity={0.8}
         >
-          <Text style={styles.continueButtonText}>{currentContent.continueButton}</Text>
+          <Text style={CommonStyles.primaryButtonText}>{currentContent.continueButton}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -374,19 +374,5 @@ const styles = StyleSheet.create({
   selectionCount: {
     fontSize: Typography.fontSize.sm,
     color: Colors.text.tertiary,
-  },
-  continueButton: {
-    backgroundColor: Colors.primary[600],
-    paddingVertical: Spacing.md,
-    borderRadius: Borders.radius.full,
-    alignItems: 'center',
-  },
-  continueButtonDisabled: {
-    opacity: 0.5,
-  },
-  continueButtonText: {
-    color: Colors.text.inverse,
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.bold,
   },
 });
