@@ -13,25 +13,43 @@ export default function Index() {
   const checkOnboardingStatus = async () => {
     try {
       console.log('Checking onboarding status...');
+
+      // Small delay to ensure SecureStore is ready
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Debug: Reset onboarding for testing (remove this in production)
+      // await SecureStore.deleteItemAsync('onboardingCompleted');
+
       // Check if onboarding is completed
       const onboardingCompleted = await SecureStore.getItemAsync('onboardingCompleted');
       console.log('Onboarding completed:', onboardingCompleted);
+      console.log('Type of onboardingCompleted:', typeof onboardingCompleted);
+      console.log('Is exactly true?:', onboardingCompleted === 'true');
 
+      // More explicit null/undefined checking
       if (onboardingCompleted === 'true') {
         // If onboarding is completed, go to main app
         console.log('Navigating to tabs');
-        router.replace('/(tabs)/');
+        setTimeout(() => {
+          router.replace('/(tabs)/');
+        }, 100);
       } else {
         // Otherwise, start onboarding
-        console.log('Navigating to onboarding');
-        router.replace('/onboarding/welcome');
+        console.log('Navigating to onboarding, value was:', onboardingCompleted);
+        setTimeout(() => {
+          router.replace('/onboarding/welcome');
+        }, 100);
       }
     } catch (error) {
       // If there's an error, start onboarding
       console.log('Error checking onboarding status:', error);
-      router.replace('/onboarding/welcome');
+      setTimeout(() => {
+        router.replace('/onboarding/welcome');
+      }, 100);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 200);
     }
   };
 

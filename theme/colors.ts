@@ -37,6 +37,12 @@ export const Colors = {
     info: '#2196F3',
   },
 
+  // Quick access to semantic colors
+  success: '#4CAF50',
+  warning: '#FF9800',
+  error: '#F44336',
+  info: '#2196F3',
+
   // Symptom Severity Colors
   symptom: {
     none: '#F5F5F5',

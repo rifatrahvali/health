@@ -22,11 +22,13 @@ export default function OnboardingLayout() {
       <Stack.Screen name="lifestyle" />
       <Stack.Screen name="symptoms" />
       <Stack.Screen name="medical-history" />
+      <Stack.Screen name="personalization-reveal" />
       <Stack.Screen name="commitment" />
       <Stack.Screen name="analysis" />
       <Stack.Screen name="report" />
       <Stack.Screen name="subscription" />
       <Stack.Screen name="account" />
+      <Stack.Screen name="onboarding-completed" />
     </Stack>
   );
 }
