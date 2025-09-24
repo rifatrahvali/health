@@ -28,6 +28,8 @@ export default function CommitmentScreen() {
   const [longPressProgress, setLongPressProgress] = useState(0);
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [commitmentMade, setCommitmentMade] = useState(false);
+  const [showQuestions, setShowQuestions] = useState(true);
+  const [questionAnswers, setQuestionAnswers] = useState<string[]>(['', '', '']);
 
   const longPressAnimValue = useRef(new Animated.Value(0)).current;
   const signatureRef = useRef<any>(null);
@@ -45,36 +47,70 @@ export default function CommitmentScreen() {
 
   const content = {
     tr: {
-      title: 'Taahhüdünüz',
-      subtitle: 'Sağlık yolculuğunuza olan bağlılığınızı gösterin',
-      pledge: 'Sağlığımı iyileştirmek ve bu uygulamanın önerilerini takip etmek için kendime söz veriyorum. Bu yolculuğa sabır ve kararlılıkla başlayacağım.',
+      title: 'Bağırsak Sağlığı Taahhüdüm',
+      subtitle: 'Sağlıklı yaşama giden yolculuğunuza başlıyor',
+      pledge: 'Bağırsak sağlığımı iyileştirmek ve GutWell planımı takip etmek için kendime söz veriyorum. Günlük alışkanlıklarımı değiştirerek, sağlıklı beslenmeye odaklanacağım ve bu yolculukta sabırlı olacağım.',
+      personalQuestions: [
+        {
+          question: 'En çok hangi semptomdan kurtulmak istiyorsunuz?',
+          placeholder: 'Örn: Şişkinlik, gaz problemi, karın ağrısı...'
+        },
+        {
+          question: 'Bu değişimi gerçekleştirmek için ne kadar kararlısınız? (1-10)',
+          placeholder: 'Kararlılık seviyenizi 1-10 arası değerlendirin'
+        },
+        {
+          question: 'Size en çok motivasyon veren şey nedir?',
+          placeholder: 'Örn: Daha enerjik hissetmek, daha iyi görünmek...'
+        }
+      ],
       signatureMethod: 'İmza ile',
       nameMethod: 'İsim ile',
       longPressMethod: 'Uzun basma ile',
-      signatureHint: 'Aşağıdaki alana imzanızı atın',
-      nameHint: 'Adınızı yazın',
-      longPressHint: 'Butona 3 saniye basılı tutun',
+      signatureHint: 'Taahhüdünüzü imzalayın',
+      nameHint: 'Adınızı yazarak taahhüt edin',
+      longPressHint: 'Butona 3 saniye basılı tutarak taahhüt edin',
       clearSignature: 'Temizle',
-      commitment: 'Taahhüt Et',
-      commitmentMade: 'Taahhüdünüz alındı! 🎉',
-      continueButton: 'Devam Et',
+      commitment: 'Taahhüdümü Ver',
+      commitmentMade: 'Taahhüdünüz alındı! Artık bu yolculukta birlikte ilerliyoruz 🎯',
+      continueButton: 'Hesap Oluştur',
       backButton: 'Geri',
+      questionnaireTitle: 'Size Özel Birkaç Soru',
+      fillQuestions: 'Lütfen aşağıdaki soruları cevaplayın',
+      skipQuestions: 'Soruları Atla',
     },
     en: {
-      title: 'Your Commitment',
-      subtitle: 'Show your dedication to your health journey',
-      pledge: 'I pledge to improve my health and follow the recommendations of this app. I will begin this journey with patience and determination.',
+      title: 'My Gut Health Commitment',
+      subtitle: 'Your journey to healthy living begins now',
+      pledge: 'I pledge to improve my gut health and follow my GutWell plan. I will change my daily habits, focus on healthy nutrition, and be patient on this journey.',
+      personalQuestions: [
+        {
+          question: 'Which symptom do you most want to get rid of?',
+          placeholder: 'E.g.: Bloating, gas issues, stomach pain...'
+        },
+        {
+          question: 'How determined are you to make this change? (1-10)',
+          placeholder: 'Rate your determination level between 1-10'
+        },
+        {
+          question: 'What motivates you the most?',
+          placeholder: 'E.g.: Feeling more energetic, looking better...'
+        }
+      ],
       signatureMethod: 'With Signature',
       nameMethod: 'With Name',
       longPressMethod: 'With Long Press',
-      signatureHint: 'Draw your signature in the area below',
-      nameHint: 'Type your name',
-      longPressHint: 'Hold the button for 3 seconds',
+      signatureHint: 'Sign your commitment',
+      nameHint: 'Commit by writing your name',
+      longPressHint: 'Commit by holding the button for 3 seconds',
       clearSignature: 'Clear',
-      commitment: 'Make Commitment',
-      commitmentMade: 'Commitment received! 🎉',
-      continueButton: 'Continue',
+      commitment: 'Make My Commitment',
+      commitmentMade: 'Commitment received! Now we move forward together on this journey 🎯',
+      continueButton: 'Create Account',
       backButton: 'Back',
+      questionnaireTitle: 'A Few Personal Questions',
+      fillQuestions: 'Please answer the questions below',
+      skipQuestions: 'Skip Questions',
     },
   };
 
@@ -135,13 +171,24 @@ export default function CommitmentScreen() {
       type: commitmentType,
       signature: commitmentType === 'signature' ? signaturePath : '',
       name: commitmentType === 'name' ? userName : '',
+      personalAnswers: questionAnswers,
       timestamp: new Date().toISOString(),
     };
 
     await SecureStore.setItemAsync('userCommitment', JSON.stringify(commitmentData));
-    await SecureStore.setItemAsync('onboardingStep', 'analysis');
+    await SecureStore.setItemAsync('onboardingStep', 'account');
 
-    router.push('/onboarding/analysis');
+    router.push('/onboarding/account');
+  };
+
+  const updateAnswer = (index: number, answer: string) => {
+    const newAnswers = [...questionAnswers];
+    newAnswers[index] = answer;
+    setQuestionAnswers(newAnswers);
+  };
+
+  const skipQuestions = () => {
+    setShowQuestions(false);
   };
 
   const handleBack = () => {
@@ -167,7 +214,47 @@ export default function CommitmentScreen() {
           <Text style={styles.pledgeText}>{currentContent.pledge}</Text>
         </View>
 
-        {!commitmentMade ? (
+        {showQuestions && (
+          <View style={styles.questionsSection}>
+            <Text style={styles.questionsTitle}>{currentContent.questionnaireTitle}</Text>
+            <Text style={styles.questionsSubtitle}>{currentContent.fillQuestions}</Text>
+
+            {currentContent.personalQuestions.map((q, index) => (
+              <View key={index} style={styles.questionGroup}>
+                <Text style={styles.questionText}>{q.question}</Text>
+                <TextInput
+                  style={styles.questionInput}
+                  value={questionAnswers[index]}
+                  onChangeText={(text) => updateAnswer(index, text)}
+                  placeholder={q.placeholder}
+                  placeholderTextColor={Colors.text.tertiary}
+                  multiline={index === 0 || index === 2}
+                  numberOfLines={index === 0 || index === 2 ? 3 : 1}
+                />
+              </View>
+            ))}
+
+            <View style={styles.questionActions}>
+              <TouchableOpacity
+                style={styles.skipQuestionsButton}
+                onPress={skipQuestions}
+              >
+                <Text style={styles.skipQuestionsText}>{currentContent.skipQuestions}</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.proceedButton}
+                onPress={() => setShowQuestions(false)}
+              >
+                <Text style={styles.proceedButtonText}>
+                  {language === 'tr' ? 'Devam Et' : 'Continue'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+
+        {!showQuestions && !commitmentMade ? (
           <>
             <Text style={styles.methodTitle}>Choose your commitment method:</Text>
 
@@ -300,16 +387,18 @@ export default function CommitmentScreen() {
             )}
           </>
         ) : (
-          <View style={styles.successSection}>
-            <Text style={styles.successText}>{currentContent.commitmentMade}</Text>
-            <View style={styles.successIcon}>
-              <Text style={styles.successEmoji}>🎯</Text>
+          !showQuestions && (
+            <View style={styles.successSection}>
+              <Text style={styles.successText}>{currentContent.commitmentMade}</Text>
+              <View style={styles.successIcon}>
+                <Text style={styles.successEmoji}>🎯</Text>
+              </View>
             </View>
-          </View>
+          )
         )}
       </ScrollView>
 
-      {commitmentMade && (
+      {(commitmentMade || !showQuestions && commitmentMade) && (
         <View style={styles.footer}>
           <TouchableOpacity
             style={CommonStyles.primaryButton}
@@ -525,5 +614,66 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background.card,
     borderTopWidth: 1,
     borderTopColor: Colors.border.light,
+  },
+  questionsSection: {
+    marginBottom: Spacing.xl,
+  },
+  questionsTitle: {
+    fontSize: Typography.fontSize.xl,
+    fontWeight: Typography.fontWeight.bold,
+    color: Colors.text.primary,
+    marginBottom: Spacing.sm,
+    textAlign: 'center',
+  },
+  questionsSubtitle: {
+    fontSize: Typography.fontSize.base,
+    color: Colors.text.secondary,
+    marginBottom: Spacing.lg,
+    textAlign: 'center',
+  },
+  questionGroup: {
+    marginBottom: Spacing.lg,
+  },
+  questionText: {
+    fontSize: Typography.fontSize.base,
+    fontWeight: Typography.fontWeight.medium,
+    color: Colors.text.primary,
+    marginBottom: Spacing.sm,
+  },
+  questionInput: {
+    backgroundColor: Colors.background.card,
+    borderRadius: Borders.radius.md,
+    padding: Spacing.md,
+    fontSize: Typography.fontSize.base,
+    color: Colors.text.primary,
+    borderWidth: Borders.width.base,
+    borderColor: Colors.border.light,
+    textAlignVertical: 'top',
+  },
+  questionActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: Spacing.lg,
+  },
+  skipQuestionsButton: {
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+  },
+  skipQuestionsText: {
+    fontSize: Typography.fontSize.sm,
+    color: Colors.text.tertiary,
+    textDecorationLine: 'underline',
+  },
+  proceedButton: {
+    backgroundColor: Colors.primary[600],
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: Spacing.md,
+    borderRadius: Borders.radius.full,
+  },
+  proceedButtonText: {
+    color: Colors.text.inverse,
+    fontSize: Typography.fontSize.base,
+    fontWeight: Typography.fontWeight.semibold,
   },
 });

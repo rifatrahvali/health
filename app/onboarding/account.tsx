@@ -130,7 +130,7 @@ export default function AccountScreen() {
         [
           {
             text: 'OK',
-            onPress: () => router.replace('/(tabs)/'),
+            onPress: () => router.push('/onboarding/onboarding-completed'),
           },
         ]
       );
@@ -143,7 +143,7 @@ export default function AccountScreen() {
 
   const handleSkip = async () => {
     await SecureStore.setItemAsync('onboardingCompleted', 'true');
-    router.replace('/(tabs)/');
+    router.push('/onboarding/onboarding-completed');
   };
 
   const handleBack = () => {
