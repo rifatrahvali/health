@@ -11,10 +11,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import { Theme } from '../../theme';
-import { CommonStyles } from '../../theme/common-styles';
+import { Colors, Spacing, Borders, Typography, Shadows } from '@/constants/theme';
+import { CommonStyles } from '@/constants/common-styles';
 
-const { Colors, Spacing, Borders, Typography } = Theme;
 const { width, height } = Dimensions.get('window');
 
 interface Achievement {
@@ -329,7 +328,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: Spacing.lg,
-    ...Theme.Shadows.lg,
+    ...Shadows.lg,
   },
   celebrationEmoji: {
     fontSize: 60,
@@ -375,7 +374,7 @@ const styles = StyleSheet.create({
     padding: Spacing.md,
     borderWidth: 1,
     borderColor: Colors.primary[200],
-    ...Theme.Shadows.sm,
+    ...Shadows.sm,
   },
   achievementIcon: {
     width: 50,

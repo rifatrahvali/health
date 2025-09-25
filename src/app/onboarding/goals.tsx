@@ -9,10 +9,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import { Theme } from '../../theme';
-import { CommonStyles } from '../../theme/common-styles';
+import { Colors, Spacing, Borders, Typography, Shadows } from '@/constants/theme';
+import { CommonStyles } from '@/constants/common-styles';
 
-const { Colors, Spacing, Borders, Typography } = Theme;
 
 interface UserGoal {
   id: string;
@@ -287,7 +286,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
     borderWidth: Borders.width.base,
     borderColor: Colors.border.light,
-    ...Theme.Shadows.xs,
+    ...Shadows.xs,
   },
   goalCardSelected: {
     borderColor: Colors.primary[600],

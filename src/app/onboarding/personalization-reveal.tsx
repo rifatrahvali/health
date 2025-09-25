@@ -11,10 +11,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import { Theme } from '../../theme';
-import { CommonStyles } from '../../theme/common-styles';
+import { Colors, Spacing, Borders, Typography, Shadows } from '@/constants/theme';
+import { CommonStyles } from '@/constants/common-styles';
 
-const { Colors, Spacing, Borders, Typography } = Theme;
 const { width } = Dimensions.get('window');
 
 interface InsightData {
@@ -436,7 +435,7 @@ const styles = StyleSheet.create({
     padding: Spacing.xl,
     marginBottom: Spacing.lg,
     alignItems: 'center',
-    ...Theme.Shadows.md,
+    ...Shadows.md,
   },
   scoreTitle: {
     fontSize: Typography.fontSize.lg,

@@ -10,10 +10,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import { Theme } from '../../theme';
-import { CommonStyles } from '../../theme/common-styles';
+import { Colors, Spacing, Borders, Typography, Shadows, Animations } from '@/constants/theme';
+import { CommonStyles } from '@/constants/common-styles';
 
-const { Colors, Spacing, Borders, Typography, Animations } = Theme;
 const { width } = Dimensions.get('window');
 
 export default function WelcomeScreen() {
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: Spacing.sm,
-    ...Theme.Shadows.sm,
+    ...Shadows.sm,
   },
   logoEmoji: {
     fontSize: 40,

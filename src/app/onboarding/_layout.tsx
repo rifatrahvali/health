@@ -1,8 +1,6 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { Theme } from '../../theme';
-
-const { Colors } = Theme;
+import { Colors } from '@/constants/theme';
 
 export default function OnboardingLayout() {
   return (
@@ -10,7 +8,7 @@ export default function OnboardingLayout() {
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          backgroundColor: Colors.background.primary,
+          backgroundColor: '#fff',
         },
         animation: 'slide_from_right',
       }}

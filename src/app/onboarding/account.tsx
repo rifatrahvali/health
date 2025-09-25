@@ -10,9 +10,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import { Theme } from '../../theme';
+import { Colors, Spacing, Borders, Typography, Shadows } from '@/constants/theme';
 
-const { Colors, Spacing, Borders, Typography } = Theme;
 
 export default function AccountScreen() {
   const [language, setLanguage] = useState<'tr' | 'en'>('tr');

@@ -1,9 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from './colors';
-import { Spacing, Layout } from './spacing';
-import { Typography } from './typography';
-import { Borders } from './borders';
-import { Shadows } from './shadows';
+import { Colors, Spacing, Typography, Borders, Shadows, Layout } from './theme';
 
 export const CommonStyles = StyleSheet.create({
   // Containers
